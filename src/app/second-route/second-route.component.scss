@@ -1,0 +1,810 @@
+@import url(https://unpkg.com/@webpixels/css@1.0/dist/index.css);
+.example-spacer {
+    flex: 1 1 auto !important;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+::ng-deep .mat-toolbar.mat-primary {
+    background: black !important;
+    color: #ffffff !important;
+    font-family: fangsong;
+    border-bottom: 4px solid #e7717d;
+    -webkit-box-shadow: 0px 0px 10px 0px #f5f5f5 !important;
+    box-shadow: 0px 0px 10px 0px #f5f5f5 !important;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+.btn-success {
+    color: #fff !important;
+    background-color: transparent !important;
+    border-color: #fff !important;
+    font-size: xx-large !important;
+}
+
+::ng-deep .mat-paginator-sticky {
+    bottom: 0px !important;
+    position: sticky !important;
+    z-index: 10 !important;
+    border-top: 2px solid;
+}
+
+.filterBtn {
+    background-color: #4a4a4a;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-top: 4px;
+    width: 100px;
+    height: 46px;
+    border: 1px solid;
+}
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation: $animations;
+    -o-animation: $animations;
+    animation: $animations;
+}
+
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+//theme
+$pink:#E7717D;
+$black: #292929;
+$bg: #191919;
+$lines: #757474;
+body {
+    background-color: $bg;
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+.text {
+    opacity: 0;
+    position: absolute;
+    z-index: 7;
+    text-align: left;
+    margin: -50px 0 0 -150px;
+    width: 300px;
+    height: 415px;
+    top: 25%;
+    left: 50%;
+    font-size: 48px;
+    font-weight: 700;
+    p {
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        height: 30px;
+    }
+    p:nth-child(2) {}
+    @include animation('on .0s ease-in-out 0s forwards');
+    button {
+        border: 0;
+        opacity: 0;
+        background: $bg;
+        color: $pink;
+        border: 1px solid $bg;
+        letter-spacing: 2px;
+        padding: .5rem 2.5rem;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        cursor: pointer;
+        @include transition(color .5s, background-color .5s);
+        @include animation('on .0s ease-in-out 0s forwards');
+        &:hover {
+            background: $pink;
+            color: $bg;
+            border: 1px solid $bg;
+        }
+    }
+}
+
+.splash {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    &_logo {
+        position: absolute;
+        margin: -15px 0 0 -25px;
+        top: 50vh;
+        z-index: 5;
+        left: 48vw;
+        width: 100px;
+        text-align: center;
+        height: 30px;
+        font-size: 26px;
+        font-weight: 600;
+        color: #ffffff;
+        opacity: 1;
+        will-change: opacity;
+        &:before {
+            display: block;
+            position: absolute;
+            left: 15px;
+            bottom: -5px;
+            width: 20px;
+            height: 1px;
+            background-color: $lines;
+            content: "";
+        }
+        &:after {
+            display: block;
+            position: absolute;
+            left: 15px;
+            top: -5px;
+            width: 20px;
+            height: 1px;
+            background-color: $lines;
+            content: "";
+            will-change: width;
+        }
+    }
+    &_svg {
+        position: relative;
+        margin: auto;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        right: 0;
+        svg {
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+            rect {
+                width: 100%;
+                height: 100%;
+                fill: $pink;
+                stroke: 0;
+                -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
+                clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
+                @include animation('expand .7s ease-in forwards 2.7s');
+            }
+        }
+    }
+    &_minimize {
+        position: absolute;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        svg {
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+            rect {
+                width: 100%;
+                height: 100%;
+                -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
+                clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
+                @include animation('scale .2s ease-out forwards 1s, hide 1.3s ease-out forwards 1.2s');
+            }
+        }
+    }
+}
+
+@include keyframes(scale) {
+    100% {
+        -webkit-clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
+        clip-path: polygon(45vw 40vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
+    }
+}
+
+@include keyframes(hide) {
+    100% {
+        fill: transparent;
+    }
+}
+
+@include keyframes (off) {
+    100% {
+        opacity: 0;
+    }
+}
+
+@include keyframes (on) {
+    100% {
+        opacity: 1;
+    }
+}
+
+@include keyframes (logo) {
+    100% {
+        color: $black;
+    }
+}
+
+@include keyframes (type) {
+    0% {
+        width: 0;
+    }
+}
+
+@include keyframes (type2) {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 0;
+    }
+    100% {
+        width: 100;
+    }
+}
+
+@include keyframes(expand) {
+    0% {}
+    25% {
+        -webkit-clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 58vh, 45vw 58vh);
+        clip-path: polygon(0vw 0vh, 55vw 40vh, 55vw 60vh, 45vw 60vh);
+        fill: white;
+    }
+    50% {
+        -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
+        clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 45vw 60vh);
+        fill: $pink;
+    }
+    75% {
+        -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
+        clip-path: polygon(0vw 0vh, 100vw 0vh, 55vw 60vh, 0vw 100vh);
+        fill: white;
+    }
+    100% {
+        -webkit-clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
+        clip-path: polygon(0vw 0vh, 100vw 0vh, 100vw 100vh, 0vw 100vh);
+        fill: $pink;
+    }
+}
+
+.penguin {
+    /* change code below */
+    --penguin-skin: black;
+    --penguin-belly: white;
+    --penguin-beak: orange;
+    /* change code above */
+    position: relative;
+    margin: auto;
+    display: block;
+    margin-top: 5%;
+    width: 300px;
+    height: 300px;
+}
+
+.penguin-top {
+    top: 10%;
+    left: 25%;
+    background: var(--penguin-skin, gray);
+    width: 50%;
+    height: 45%;
+    border-radius: 70% 70% 60% 60%;
+}
+
+.penguin-bottom {
+    top: 40%;
+    left: 23.5%;
+    background: var(--penguin-skin, gray);
+    width: 53%;
+    height: 45%;
+    border-radius: 70% 70% 100% 100%;
+}
+
+.right-hand {
+    top: 5%;
+    left: 25%;
+    background: var(--penguin-skin, black);
+    width: 30%;
+    height: 60%;
+    border-radius: 30% 30% 120% 30%;
+    transform: rotate(130deg);
+    z-index: -1;
+    animation-duration: 2s;
+    animation-name: wave;
+    animation-iteration-count: infinite;
+    transform-origin: 0% 0%;
+    animation-timing-function: linear;
+}
+
+.left-hand {
+    top: 0%;
+    left: 75%;
+    background: var(--penguin-skin, gray);
+    width: 30%;
+    height: 60%;
+    border-radius: 30% 30% 30% 120%;
+    transform: rotate(-45deg);
+    z-index: -1;
+}
+
+.right-cheek {
+    top: 15%;
+    left: 35%;
+    background: var(--penguin-belly, white);
+    width: 60%;
+    height: 70%;
+    border-radius: 70% 70% 60% 60%;
+}
+
+.left-cheek {
+    top: 15%;
+    left: 5%;
+    background: var(--penguin-belly, white);
+    width: 60%;
+    height: 70%;
+    border-radius: 70% 70% 60% 60%;
+}
+
+.belly {
+    top: 60%;
+    left: 2.5%;
+    background: var(--penguin-belly, white);
+    width: 95%;
+    height: 100%;
+    border-radius: 120% 120% 100% 100%;
+}
+
+.right-feet {
+    top: 85%;
+    left: 60%;
+    background: var(--penguin-beak, orange);
+    width: 15%;
+    height: 30%;
+    border-radius: 50% 50% 50% 50%;
+    transform: rotate(-80deg);
+    z-index: -2222;
+}
+
+.left-feet {
+    top: 85%;
+    left: 25%;
+    background: var(--penguin-beak, orange);
+    width: 15%;
+    height: 30%;
+    border-radius: 50% 50% 50% 50%;
+    transform: rotate(80deg);
+    z-index: -2222;
+}
+
+.right-eye {
+    top: 45%;
+    left: 60%;
+    background: black;
+    width: 15%;
+    height: 17%;
+    border-radius: 50%;
+}
+
+.left-eye {
+    top: 45%;
+    left: 25%;
+    background: black;
+    width: 15%;
+    height: 17%;
+    border-radius: 50%;
+}
+
+.sparkle {
+    top: 25%;
+    left: 15%;
+    background: white;
+    width: 35%;
+    height: 35%;
+    border-radius: 50%;
+}
+
+.blush-right {
+    top: 65%;
+    left: 15%;
+    background: pink;
+    width: 15%;
+    height: 10%;
+    border-radius: 50%;
+}
+
+.blush-left {
+    top: 65%;
+    left: 70%;
+    background: pink;
+    width: 15%;
+    height: 10%;
+    border-radius: 50%;
+}
+
+.beak-top {
+    top: 60%;
+    left: 40%;
+    background: var(--penguin-beak, orange);
+    width: 20%;
+    height: 10%;
+    border-radius: 50%;
+}
+
+.beak-bottom {
+    top: 65%;
+    left: 42%;
+    background: var(--penguin-beak, orange);
+    width: 16%;
+    height: 10%;
+    border-radius: 50%;
+}
+
+.penguin * {
+    position: absolute;
+}
+
+.penguin {
+    animation-duration: 10s;
+    animation-name: loop;
+    animation-iteration-count: infinite;
+    transform-origin: 0% 0%;
+    animation-timing-function: linear;
+}
+
+@keyframes wave {
+    10% {
+        transform: rotate(110deg);
+    }
+    30% {
+        transform: rotate(130deg);
+    }
+    50% {
+        transform: rotate(110deg);
+    }
+    80% {
+        transform: rotate(130deg);
+    }
+    100% {
+        transform: rotate(110deg);
+    }
+}
+
+@keyframes loop {
+    0% {
+        transform: rotateY(0deg);
+    }
+    25% {
+        transform: rotateY(-10deg);
+    }
+    50% {
+        transform: rotateY(0deg);
+    }
+    75% {
+        transform: rotateY(10deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+::ng-deep input.form-control.ng-tns-c124-0 {
+    border: 0px solid #E7717D !important;
+    border-bottom: 3px solid black !important;
+}
+
+::ng-deep .mat-form-field-infix,
+::ng-deep .mat-form-field-infix:hover {
+    // margin-top: -1px !important;
+    border-bottom: 1px solid;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.secondRoutePanel {
+    overflow-x: hidden;
+}
+
+.tableOverflow {
+    overflow-y: overlay !important;
+    height: 663px;
+    width: 97%;
+    margin: 0px 21px;
+    box-shadow: 0px 7px 5px 6px #a8abb1;
+}
+
+::ng-deep .tableOverflow::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+    color: #b3b3b3;
+    transform: rotate(90deg);
+}
+
+::ng-deep .tableOverflow::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+::ng-deep .tableOverflow::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #b3b3b3;
+}
+
+// ----------------------------------------------------------
+table {
+    width: 100%;
+}
+
+.button-icon {
+    border: 0px !important;
+}
+
+.button-close {
+    border: 0px !important;
+}
+
+.navigationClass {
+    margin-bottom: 20px;
+}
+
+.search-field {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+    color: #748AA1;
+}
+
+.add-button {
+    position: absolute;
+    width: 104px;
+    height: 50px;
+    background: #3C0EC0;
+    box-shadow: 0px 4px 10px rgba(60, 14, 192, 0.5);
+    border-radius: 24px;
+}
+
+th {
+    font-weight: 400;
+    color: black;
+}
+
+.submit {
+    border: 0px !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+    text-align: center;
+    background: #3C0EC0;
+    box-shadow: 0px 4px 10px rgba(60, 14, 192, 0.5);
+    border-radius: 24px;
+    // position: absolute;
+    width: 125px;
+    height: 44px;
+}
+
+.delete {
+    border: 0px !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+    text-align: center;
+    background: red;
+    box-shadow: 0px 4px 10px rgba(60, 14, 192, 0.5);
+    border-radius: 24px;
+    // position: absolute;
+    width: 125px;
+    height: 44px;
+}
+
+.myLabel {
+    background-color: white;
+    color: #9CA4AA;
+    font-weight: 400 !important;
+    padding-right: 35px !important;
+}
+
+.browseBtn {
+    background-color: #3C0EC0;
+    padding-right: 10px;
+}
+
+.save-add {
+    // position: absolute;
+    width: 206px;
+    height: 44px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+    text-align: center;
+    border: 0px !important;
+    background: #000000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+}
+
+ ::ng-deep .modal-backdrop {
+    z-index: 1050 !important;
+}
+
+.mat-table {
+    width: 100%;
+}
+
+.mat-row {
+    width: 100%;
+    min-height: 12px;
+}
+
+.tableCol {
+    text-align: center !important;
+    min-width: 54px;
+}
+
+.mat-header-cell {
+    min-height: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0px 6px;
+}
+
+.mat-header-row {
+    width: 100%;
+    min-height: 10px;
+    border-bottom: 2px solid;
+    padding: 0px 0px 0px 4px;
+}
+
+.mat-cell-column {
+    border-top: 1px solid crimson;
+}
+
+td.mat-cell {
+    font-weight: 600;
+    font-size: 15px;
+    font-family: system-ui;
+}
+
+.mat-cell {
+    flex: 0 0 50px !important;
+    justify-content: left;
+    font-size: smaller;
+    padding: 0px 8px;
+    text-align: left;
+}
+
+.mat-cell,
+.mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    line-break: unset;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.mat-cell-concession {
+    flex: 0 0 250px !important;
+    min-width: 250px !important;
+    white-space: unset !important;
+    justify-content: left;
+    font-size: smaller;
+    padding: 0px 0px 0px 4px;
+    text-align: left;
+    color: black;
+}
+
+.mat-row:nth-child(1n + 1) {
+    background-color: white;
+}
+
+.mat-row:not(:nth-child(2n + 1)) {
+    background-color: white;
+}
+
+.example-element-row:hover {
+    background: red;
+}
+
+.example-element-row:active {
+    background: #efefef;
+}
+
+@media (min-width: 576px) {
+     ::ng-deep .modal-dialog {
+        max-width: 550px;
+        margin: 1.75rem auto;
+    }
+}
+
+.tableStyle {
+    width: 15% !important;
+    text-align: center;
+}
+
+.btnStyle {
+    border: none;
+    padding: 0;
+    border-bottom: 3px solid;
+    outline: inherit;
+}
+
+.modalStyle {
+    width: 99%;
+    border: 2px solid;
+    background-color: white;
+}
+
+.select-option {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.13);
+    border-radius: 10px;
+    width: 300px;
+    height: 47px;
+    border: 2px solid;
+}
+
+ ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: transparent;
+}
+
+ ::ng-deep .mat-form-field-infix {
+    border-top: 1px;
+    line-height: 2.1;
+}
+
+ ::ng-deep .mat-form-field-underline {
+    display: none;
+}

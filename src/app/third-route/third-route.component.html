@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0 py-1">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#" aria-current="page">Home</a>
+                <a class="nav-item nav-link" [routerLink]="['/route2']">Route2</a>
+                <a class="nav-item nav-link" [routerLink]="['/route3']">Route3</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div>
+    <div class="container justify-content-center thirdRoutePanel">
+        <app-show-dynamic-data [ads]="ads"></app-show-dynamic-data>
+    </div>
+
+</div>
